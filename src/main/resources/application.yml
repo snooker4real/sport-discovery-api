@@ -1,5 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:discovery;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
 management:
   endpoints:
     web:
       exposure:
         include: health,info,prometheus
+---
+spring:
+  config:
+    activate:
+      on-profile: postgres
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/discovery}
+    username: ${DB_USER:discovery}
+    password: ${DB_PASSWORD:discovery}

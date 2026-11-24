@@ -18,7 +18,8 @@ Chaque recommandation renvoie un score et les raisons qui l'expliquent.
 ## Choix
 
 - Scoring par contenu (sport aimé, tags communs, proximité) : simple, testable et explicable, une base avant un modèle ML.
-- Catalogue en mémoire derrière `CatalogService` : à remplacer par PostgreSQL sans toucher aux contrôleurs.
+- Persistance Spring Data JPA et migrations Flyway (`db/migration`). H2 en mode PostgreSQL par défaut, PostgreSQL avec le profil `postgres` (`docker compose up -d` puis `SPRING_PROFILES_ACTIVE=postgres ./gradlew bootRun`).
+- Le scoring est une liste de `ScoringRule` (interface fonctionnelle) : ajouter un critère, c'est ajouter une règle, chacune testée seule (`ScoringRuleTest`).
 
 ## Lancer
 
@@ -29,3 +30,5 @@ docker build -t sport-discovery-api .
 ```
 
 La CI GitHub Actions exécute `./gradlew build` à chaque push.
+
+Les identifiants `discovery/discovery` (compose et profil `postgres`) sont des valeurs de développement, pas de production. Les données de démo sont dans la migration `V2__seed.sql`.

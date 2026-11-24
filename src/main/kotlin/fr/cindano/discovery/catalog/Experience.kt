@@ -17,10 +17,10 @@ data class Experience(
 )
 
 data class ExperienceRequest(
-    @field:NotBlank val title: String,
-    @field:NotBlank val sport: String,
-    @field:NotBlank val city: String,
+    @field:NotBlank @field:Size(max = 200) val title: String,
+    @field:NotBlank @field:Size(max = 50) val sport: String,
+    @field:NotBlank @field:Size(max = 100) val city: String,
     val level: Level,
     @field:DecimalMin("0.0") val priceEur: Double,
-    @field:Size(max = 10) val tags: Set<String> = emptySet(),
+    @field:Size(max = 10) val tags: Set<@Size(max = 50) String> = emptySet(),
 )
