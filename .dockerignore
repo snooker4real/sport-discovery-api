@@ -2,3 +2,6 @@ build/
 .gradle/
 .git/
 .idea/
+
+.env
+.env.*
