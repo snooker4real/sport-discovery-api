@@ -5,7 +5,7 @@ services:
       SPRING_PROFILES_ACTIVE: postgres
       DB_URL: jdbc:postgresql://db:5432/discovery
       DB_USER: discovery
-      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in Dokploy}
+      DB_PASSWORD: ${DB_PASSWORD:?}
     ports:
       - "${SPORT_BIND_IP:-127.0.0.1}:${SPORT_PORT:-8099}:8080"
     depends_on:
@@ -18,7 +18,7 @@ services:
     environment:
       POSTGRES_DB: discovery
       POSTGRES_USER: discovery
-      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in Dokploy}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
