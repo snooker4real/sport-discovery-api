@@ -31,6 +31,6 @@ docker build -t sport-discovery-api .
 
 La CI GitHub Actions exécute `./gradlew build` à chaque push.
 
-Le déploiement Dokploy utilise PostgreSQL 18.7 et monte le volume `pgdata18` dans `/var/lib/postgresql`. Avant de redéployer une installation utilisant le volume `pgdata` de PostgreSQL 16, sauvegarder le cluster et restaurer les données dans `pgdata18` avec PostgreSQL 18. Garder l'ancien volume jusqu'à la validation.
+Le déploiement Dokploy utilise PostgreSQL 18.7 et monte le volume `pgdata18` dans `/var/lib/postgresql`. Si le déploiement utilise encore PostgreSQL 16 et le volume `pgdata`, suspendre les écritures avant la sauvegarde finale. Restaurer cette sauvegarde dans `pgdata18` avec PostgreSQL 18, puis valider les données et le démarrage de l'API avant de rouvrir les écritures. Garder l'ancien volume pour le retour arrière avant la réouverture.
 
 Les identifiants `discovery/discovery` (compose et profil `postgres`) sont des valeurs de développement, pas de production. Les données de démo sont dans la migration `V2__seed.sql`.
